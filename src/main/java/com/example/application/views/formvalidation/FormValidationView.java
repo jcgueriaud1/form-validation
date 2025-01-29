@@ -2,6 +2,8 @@ package com.example.application.views.formvalidation;
 
 import java.time.LocalDateTime;
 
+import com.example.application.views.MainLayout;
+
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.html.Span;
@@ -24,6 +26,7 @@ public class FormValidationView extends VerticalLayout {
     }
 
     private void createExampleFormValidationOnAttach() {
+        add(new Span("Form validation on attach"));
         Data data = new Data(LocalDateTime.now().minusDays(3));
         DateTimePicker dateTimePicker = new DateTimePicker();
         TextField textField = new TextField();
@@ -52,7 +55,7 @@ public class FormValidationView extends VerticalLayout {
 
 
     private void createExampleFormValidation() {
-
+        add(new Span("Form validation"));
         Data data = new Data(LocalDateTime.now().minusDays(3));
         DateTimePicker dateTimePicker = new DateTimePicker();
         TextField textField = new TextField();Binder<Data> binder = new Binder<>();
@@ -64,8 +67,6 @@ public class FormValidationView extends VerticalLayout {
                 .asRequired("Required")
                 .bind(Data::getMessage, Data:: setMessage);
         binder.setBean(data);
-        // textfield and datetime picker are valid on the client side
-        // they are invalid on the server side
         BinderValidationStatus<Data> binderValidationStatus = binder.validate();
         binderValidationStatus.getFieldValidationStatuses().stream()
                 .filter(v -> v.isError()).forEach(
@@ -77,6 +78,7 @@ public class FormValidationView extends VerticalLayout {
 
 
     private void createExampleFormNoValidationOnStart() {
+        add(new Span("Form no validation"));
         Data data = new Data(LocalDateTime.now().minusDays(3));
         DateTimePicker dateTimePicker = new DateTimePicker();
         TextField textField = new TextField();Binder<Data> binder = new Binder<>();
